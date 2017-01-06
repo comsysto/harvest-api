@@ -13,6 +13,12 @@ To install the library, use the normal approach with elm-package.
 elm-package install comsysto/harvest-api
 ```
 
+## To do
+
+- Expenses API is missing
+- Tests (OMG)
+
+
 ## Example
 For a full working example of this library in use, please visit.
 
