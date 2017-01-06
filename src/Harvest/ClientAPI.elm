@@ -21,6 +21,24 @@ module Harvest.ClientAPI
         )
 
 {-| Warpper around Harvest Client API
+
+# Client
+@docs Client
+
+# Client API
+@docs getAllClients, getClient, createClient, updateClient, toggleClient, deleteClient
+
+# Client decoders
+@docs clientsDecoder, clientDecoder
+
+# Contact
+@docs Contact
+
+# Contact API
+@docs getAllContacts, getAllContactsForClient, getClientContact, createContact, updateContact, deleteContact
+
+# Contact decoders
+@docs contactsDecoder, contactDecoder
 -}
 
 import Date exposing (Date)

@@ -13,6 +13,24 @@ module Harvest.ReportingAPI
         )
 
 {-| Warpper around Harvest Reporting API
+
+# DayEntry
+@docs DayEntry
+
+# DayEntry API
+@docs getEntriesByUserForDateRange, getEntriesForProjectTimeframe
+
+# DayEntry decoders
+@docs dayEntry, hours
+
+# Expense
+@docs Expense
+
+# Expense API
+@docs getExpensesByUserForDateRange, getExpensesForProjectTimeframe
+
+# Expense decoders
+@docs expenses, expense
 -}
 
 import Dict exposing (Dict)

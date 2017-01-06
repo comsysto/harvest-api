@@ -13,6 +13,16 @@ module Harvest.TimesheetAPI
         )
 
 {-| Warpper around Harvest Timesheet API
+
+# DayEntry
+@docs DayEntry
+
+# Timesheet API
+@docs createEntry, getEntriesForCurrentDay, getEntriesForDayOfYear, getEntryById, deleteEntry, toggleEntry, updateEntry
+
+# DayEntry decoders
+@docs dayEntriesDecoder, dayEntryDecoder
+
 -}
 
 import Date exposing (Date)

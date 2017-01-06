@@ -9,6 +9,13 @@ module Harvest.WhoAmI
         )
 
 {-| Warpper around Harvest Who Am I API
+
+# WhoAmI
+@docs ProjectManager, User, Modules, Company, WhoAmI
+
+# WhoAmI API
+@docs getUserInfo
+
 -}
 
 import Json.Decode exposing (..)

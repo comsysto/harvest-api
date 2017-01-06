@@ -21,6 +21,25 @@ module Harvest.UserAPI
         )
 
 {-| Warpper around Harvest User API
+
+# User
+@docs User, SimpleUser
+
+# User API
+@docs allUsers, getUser, createUser, updateUser, deleteUser, toggleUser
+
+# User decoders
+@docs usersDecoder, userDecoder
+
+# Assignment
+@docs Assignment
+
+# Assignment API
+@docs getUsersAssignedToProject, getUserAssignment, assignUserToAProject, removeUserFromProject, updateAssignment
+
+# Assignment decoders
+@docs assignmentsDecoder, assignmentDecoder
+
 -}
 
 import Date exposing (Date)
