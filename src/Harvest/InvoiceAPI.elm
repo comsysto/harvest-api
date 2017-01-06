@@ -35,6 +35,42 @@ module Harvest.InvoiceAPI
         )
 
 {-| Warpper around Harvest Invoice API
+
+# Invoice
+@docs Invoice
+
+# Invoice API
+@docs getAllInvoices, getInvoice, deleteInvoice, updateInvoice, createInvoice
+
+# Invoice decoders
+@docs invoicesDecoder, invoiceDecoder
+
+# Message
+@docs Message
+
+# Message API
+@docs getMessagesForInvoice, deleteMessage, sendInvoice, markInvoiceAsDraft, markInvoiceAsSent, markInvoiceAsClosed, markInvoiceAsOpen
+
+# Message decoders
+@docs messagesDecoder, messageDecoder
+
+# InvoiceCategory
+@docs InvoiceCategory
+
+# InvoiceCategory API
+@docs getInvoiceCategories, createInvoiceCategory, updateInvoiceCategory, deleteInvoiceCategory
+
+# InvoiceCategory decoders
+@docs invoiceCategoriesDecoder, invoiceCategoryDecoder
+
+# Payment
+@docs Payment
+
+# Payment API
+@docs getPaymentsForInvoice, getPaymentForInvoice, deletePayment, createPayment
+
+# Payment decoders
+@docs paymentsDecoder, paymentDecoder
 -}
 
 import Date exposing (Date)

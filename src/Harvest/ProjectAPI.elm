@@ -2,6 +2,8 @@ module Harvest.ProjectAPI
     exposing
         ( Project
         , SimpleProject
+        , projectsDecoder
+        , projectDecoder
         , getProject
         , getAllProjects
         , createProject
@@ -11,6 +13,14 @@ module Harvest.ProjectAPI
         )
 
 {-| Warpper around Harvest Project API
+# Project
+@docs Project, SimpleProject
+
+# Project API
+@docs getProject, getAllProjects, createProject, deleteProject, updateProject, toggleProject
+
+# Project decoders
+@docs projectsDecoder, projectDecoder
 -}
 
 import Date exposing (Date)

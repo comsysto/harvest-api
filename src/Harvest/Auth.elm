@@ -1,6 +1,10 @@
 module Harvest.Auth exposing (checkAccessTokenAvailable, authUrl)
 
 {-| Support for Authentication
+
+# Utility methods
+@docs authUrl, checkAccessTokenAvailable
+
 -}
 
 import Dict

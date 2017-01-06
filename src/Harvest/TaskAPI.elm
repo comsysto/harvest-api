@@ -21,6 +21,24 @@ module Harvest.TaskAPI
         )
 
 {-| Warpper around Harvest Task API
+
+# Task
+@docs Task
+
+# Task API
+@docs getAllTasks, getTask, createTask, deleteTask, updateTask, reactivateTask
+
+# Task decoders
+@docs tasksDecoder, taskDecoder
+
+# TaskAssignment
+@docs TaskAssignment
+
+# TaskAssignment API
+@docs getTasksAssignedToProject, getTaskAssignment, assignTaskToAProject, createNewTaskAndAssignItToProject, removeTaskFromProject, updateTaskAssignment
+
+# TaskAssignment decoders
+@docs taskAssignmentsDecoder, taskAssignmentDecoder
 -}
 
 import Date exposing (Date)
