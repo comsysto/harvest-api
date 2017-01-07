@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "2.0.0",
     "summary": "Harvest API for Elm",
     "repository": "https://github.com/comsysto/harvest-api.git",
     "license": "BSD3",
