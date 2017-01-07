@@ -103,7 +103,7 @@ Usage:
 
 sends a GET request to `https://{accountId}.harvestapp.com/people/{userId}/entries?from=YYYYMMDD&to=YYYYMMDD&access_token={token}`
 
-Response: `200 OK if successful`
+Response: `200 OK` if successful
 -}
 getEntriesByUserForDateRange : String -> Int -> String -> String -> String -> Dict String String -> Request (List DayEntry)
 getEntriesByUserForDateRange accountId userId from to token params =
