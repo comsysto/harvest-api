@@ -89,7 +89,11 @@ type alias Contact =
 {-|
 Get All Clients
 
-GET https://YOURACCOUNT.harvestapp.com/clients
+Usage:
+`getAllClients accountId token`
+
+sends a GET request to
+`https://{accountId}.harvestapp.com/clients?access_token={token}`
 -}
 getAllClients : String -> String -> Request (List Client)
 getAllClients accountId token =
@@ -107,7 +111,11 @@ getAllClients accountId token =
 {-|
 Get A Single Client
 
-GET https://YOURACCOUNT.harvestapp.com/clients/{CLIENTID}
+Usage:
+`getClient accountId clientId token`
+
+sends a GET request to
+`https://{accountId}.harvestapp.com/clients/{CLIENTID}?access_token={token}`
 -}
 getClient : String -> Int -> String -> Request Client
 getClient accountId clientId token =
@@ -125,9 +133,13 @@ getClient accountId clientId token =
 {-|
 Create A New Client
 
-POST https://YOURACCOUNT.harvestapp.com/clients
+Usage:
+`createClient accountId token client`
 
-HTTP Response: 201 Created, along with Location /clients/{NEWCLIENTID}
+sends a POST request to `https://{accountId}.harvestapp.com/clients?access_token={token}`
+
+Response:
+`201 Created`, along with header `Location /clients/{NEWCLIENTID}`
 -}
 createClient : String -> String -> Client -> Request String
 createClient accountId token client =
@@ -145,9 +157,13 @@ createClient accountId token client =
 {-|
 Update A Client
 
-PUT https://YOURACCOUNT.harvestapp.com/clients/{CLIENTID}
+Usage:
+`updateClient accountId client token`
 
-HTTP Response: 200 OK, along with Location /clients/{CLIENTID}
+sends a PUT request to `https://{accountId}.harvestapp.com/clients/{CLIENTID}?accessToken={token}`
+
+Response:
+`200 OK`, along with Header `Location /clients/{CLIENTID}`
 -}
 updateClient : String -> Client -> String -> Request String
 updateClient accountId client token =
@@ -165,9 +181,13 @@ updateClient accountId client token =
 {-|
 Activate Or Deactivate An Existing Client
 
-POST https://YOURACCOUNT.harvestapp.com/clients/{CLIENTID}/toggle
+Usage:
+`toggleClient accountId clientId token`
 
-HTTP Response: 200 OK, along with Location /clients/{CLIENTID}
+sends a POST request to `https://{accountId}.harvestapp.com/clients/{CLIENTID}/toggle?access_token={token}`
+
+Response:
+`200 OK`, along with Header `Location /clients/{CLIENTID}`
 -}
 toggleClient : String -> Int -> String -> Request String
 toggleClient accountId clientId token =
@@ -185,9 +205,12 @@ toggleClient accountId clientId token =
 {-|
 Delete A Client
 
-DELETE https://YOURACCOUNT.harvestapp.com/clients/{CLIENTID}
+Usage:
+`deleteClient accountId clientId token`
 
-HTTP Response: 200 OK
+sends a DELETE request to `https://{accountId}.harvestapp.com/clients/{CLIENTID}?access_token={token}`
+
+Response: `200 OK`
 -}
 deleteClient : String -> Int -> String -> Request String
 deleteClient accountId clientId token =
@@ -209,13 +232,15 @@ deleteClient accountId clientId token =
 {-|
 Get All Contacts
 
-GET https://YOURACCOUNT.harvestapp.com/contacts
+Usage: `getAllContacts accountId token params`
 
-HTTP Response: 200 OK
+sends a GET request to `https://YOURACCOUNT.harvestapp.com/contacts?access_token=token`
+
+Response: `200 OK`
 
 Allowed parameters:
 
-updated_since: updated_since=2010-09-25+18%3A30
+`updated_since` e.g. `updated_since=2010-09-25+18%3A30`
 -}
 getAllContacts : String -> String -> Dict String String -> Request (List Contact)
 getAllContacts accountId token params =
@@ -233,13 +258,16 @@ getAllContacts accountId token params =
 {-|
 Get All Contacts For A Client
 
-GET https://YOURACCOUNT.harvestapp.com/clients/{CLIENTID}/contacts
+Usage:
+`getAllContactsForClient accountId clientId token params`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/clients/{CLIENTID}/contacts?access_token={token}`
+
+Response: `200 OK`
 
 Allowed parameters:
 
-updated_since: updated_since=2010-09-25+18%3A30
+`updated_since` e.g. `updated_since=2010-09-25+18%3A30`
 -}
 getAllContactsForClient : String -> Int -> String -> Dict String String -> Request (List Contact)
 getAllContactsForClient accountId clientId token params =
@@ -257,9 +285,12 @@ getAllContactsForClient accountId clientId token params =
 {-|
 Get A Client Contact
 
-GET https://YOURACCOUNT.harvestapp.com/contacts/{CONTACTID}
+Usage:
+`getClientContact accountId clientId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/contacts/{CONTACTID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 getClientContact : String -> Int -> String -> Request Contact
 getClientContact accountId clientId token =
@@ -277,11 +308,14 @@ getClientContact accountId clientId token =
 {-|
 Create A New Client Contact
 
-POST https://YOURACCOUNT.harvestapp.com/contacts
+Usage:
+`createContact accountId token contact`
 
-HTTP Response: 201 Created
+sends a POST request to `https://YOURACCOUNT.harvestapp.com/contacts?access_token={token}`
 
-Note: Note: Only Client-ID, First-Name, and Last-Name are required.
+Response: `201 Created`
+
+Note: Only Client-ID, First-Name, and Last-Name are required.
 -}
 createContact : String -> String -> Contact -> Request String
 createContact accountId token contact =
@@ -299,9 +333,12 @@ createContact accountId token contact =
 {-|
 Update A Client Contact
 
-PUT https://YOURACCOUNT.harvestapp.com/contacts/{CONTACTID}
+Usage:
+`updateContact accountId contact token`
 
-HTTP Response: 200 OK, along with Location /contacts/{CONTACTID}
+sends a PUT request to `https://YOURACCOUNT.harvestapp.com/contacts/{CONTACTID}?access_token={token}`
+
+Response: `200 OK`, along with header `Location /contacts/{CONTACTID}`
 -}
 updateContact : String -> Contact -> String -> Request String
 updateContact accountId contact token =
@@ -319,9 +356,12 @@ updateContact accountId contact token =
 {-|
 Delete A Client Contact
 
-DELETE https://YOURACCOUNT.harvestapp.com/contacts/{CONTACTID}
+Usage:
+`deleteContact accountId contactId token`
 
-HTTP Response: 200 OK
+sends a DELETE request to `https://{accountId}.harvestapp.com/contacts/{CONTACTID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 deleteContact : String -> Int -> String -> Request String
 deleteContact accountId contactId token =

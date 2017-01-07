@@ -171,11 +171,13 @@ assignmentDecoder =
 {-|
 Show All Users
 
-GET https://YOURACCOUNT.harvestapp.com/people
+Usage: `allUsers accountId token params`
+
+sends a GET request to `https://{accountId}.harvestapp.com/people?access_token={token}`
 
 You may also use the user’s email address in place of a User ID
 
-HTTP Response: 200 OK
+Response: `200 OK` if successful
 -}
 allUsers : String -> String -> Dict String String -> Request (List User)
 allUsers accountId token params =
@@ -193,7 +195,10 @@ allUsers accountId token params =
 {-|
 Show single user
 
-GET https://YOURACCOUNT.harvestapp.com/people/{USERID}
+Usage:
+`getUser accountId userId token`
+
+sends a GET request to `https://{accountId}.harvestapp.com/people/{userId}?access_token={token}`
 -}
 getUser : String -> Int -> String -> Request User
 getUser accountId userId token =
@@ -211,9 +216,12 @@ getUser accountId userId token =
 {-|
 Create A New User
 
-POST https://YOURACCOUNT.harvestapp.com/people
+Usage:
+`createUser accountId token user`
 
-HTTP Response: 201 Created
+sends a POST request to `https://{accountId}.harvestapp.com/people?access_token={token}`
+
+Response: `201 Created` if successful
 -}
 createUser : String -> String -> SimpleUser -> Request String
 createUser accountId token user =
@@ -235,9 +243,12 @@ createUser accountId token user =
 {-|
 Update A User
 
-PUT https://YOURACCOUNT.harvestapp.com/people/{USERID}
+Usage:
+`updateUser accountId user token`
 
-HTTP Response: 200 OK
+sends a PUT request to `https://{accountId}.harvestapp.com/people/{USERID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 updateUser : String -> User -> String -> Request String
 updateUser accountId user token =
@@ -255,9 +266,11 @@ updateUser accountId user token =
 {-|
 Delete A User
 
-DELETE https://YOURACCOUNT.harvestapp.com/people/{USERID}
+Usage: `deleteUser accountId userId token`
 
-HTTP Response: 200 OK
+sends a DELETE request to `https://YOURACCOUNT.harvestapp.com/people/{USERID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 deleteUser : String -> Int -> String -> Request String
 deleteUser accountId userId token =
@@ -275,9 +288,11 @@ deleteUser accountId userId token =
 {-|
 Toggle An Existing User
 
-POST https://YOURACCOUNT.harvestapp.com/people/{USERID}/toggle
+Usage: `toggleUser accountId userId token`
 
-HTTP Response: 200
+sends a POST request to `https://{accountId}.harvestapp.com/people/{userId}/toggle?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 toggleUser : String -> Int -> String -> Request String
 toggleUser accountId userId token =
@@ -299,11 +314,13 @@ toggleUser accountId userId token =
 {-|
 Get Users Assigned To Projects
 
-GET https://YOURACCOUNT.harvestapp.com/projects/{PROJECTID}/user_assignments
+Usage: `getUsersAssignedToProject accountId projectId token params`
+
+sends a GET request to `https://{accountId}.harvestapp.com/projects/{projectId}/user_assignments?access_token={token}`
 
 Allowed parameters:
 
-updated_since e.g. updated_since=2015-09-25+18%3A30
+`updated_since` e.g. `updated_since=2015-09-25+18%3A30`
 -}
 getUsersAssignedToProject : String -> Int -> String -> Dict String String -> Request (List Assignment)
 getUsersAssignedToProject accountId projectId token params =
@@ -321,9 +338,11 @@ getUsersAssignedToProject accountId projectId token params =
 {-|
 Get A User Assignment
 
-GET https://YOURACCOUNT.harvestapp.com/projects/{PROJECTID}/user_assignments/{USERASSIGNMENTID}
+Usage: `getUserAssignment accountId projectId assignmentId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/projects/{projectId}/user_assignments/{assignmentId}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 getUserAssignment : String -> Int -> Int -> String -> Request Assignment
 getUserAssignment accountId projectId assignmentId token =
@@ -341,9 +360,11 @@ getUserAssignment accountId projectId assignmentId token =
 {-|
 Assign A User To A Project
 
-POST https://YOURACCOUNT.harvestapp.com/projects/{PROJECTID}/user_assignments
+Usage: `assignUserToAProject accountId userId projectId token`
 
-HTTP Response: 201 Created and the header Location: `/projects/{PROJECT_ID}/user_assignments/{NEW_USER_ASSIGNMENT_ID}`
+sends a POST request to `https://{accountId}.harvestapp.com/projects/{projectId}/user_assignments?access_token={token}`
+
+Response: `201 Created` and the header `Location: /projects/{PROJECT_ID}/user_assignments/{NEW_USER_ASSIGNMENT_ID}`
 
 -}
 assignUserToAProject : String -> Int -> Int -> String -> Request String
@@ -362,7 +383,9 @@ assignUserToAProject accountId userId projectId token =
 {-|
 Remove A User From A Project
 
-DELETE https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/user_assignments/{USER_ASSIGNMENT_ID}
+Usage: `removeUserFromProject accountId projectId assignmentId token`
+
+sends a DELETE request to `https://{accountId}.harvestapp.com/projects/{projectId}/user_assignments/{assignmentId}?access_token={token}`
 -}
 removeUserFromProject : String -> Int -> Int -> String -> Request String
 removeUserFromProject accountId projectId assignmentId token =
@@ -380,7 +403,9 @@ removeUserFromProject accountId projectId assignmentId token =
 {-|
 Updating User Assignments
 
-PUT https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/user_assignments/{USER_ASSIGNMENT_ID}
+Usage: `updateAssignment accountId assignment token`
+
+sends a PUT request to `https://{accountId}.harvestapp.com/projects/{PROJECT_ID}/user_assignments/{USER_ASSIGNMENT_ID}?access_token={token}`
 -}
 updateAssignment : String -> Assignment -> String -> Request String
 updateAssignment accountId assignment token =

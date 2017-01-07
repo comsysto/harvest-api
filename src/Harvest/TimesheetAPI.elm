@@ -80,9 +80,12 @@ type alias SimpleDayEntry =
 {-|
 Creating An Entry
 
-POST https://YOURACCOUNT.harvestapp.com/daily/add
+Usage:
+`createEntry accountId token entry`
 
-HTTP Response: 201 Created
+sends a POST request to `https://{accountId}.harvestapp.com/daily/add?access_token={token}`
+
+Response: `201 Created` if successful
 -}
 createEntry : String -> String -> SimpleDayEntry -> Request DayEntry
 createEntry accountId token entry =
@@ -104,7 +107,10 @@ createEntry accountId token entry =
 {-|
 Retrieve Entries For The Current Day. Only tracked time, no assignments
 
-GET https://YOURACCOUNT.harvestapp.com/daily?slim=1
+Usage:
+`getEntriesForCurrentDay accountId token`
+
+sends a GET request to `https://{accountId}.harvestapp.com/daily?slim=1&access_token={token}`
 -}
 getEntriesForCurrentDay : String -> String -> Request (List DayEntry)
 getEntriesForCurrentDay accountId token =
@@ -122,11 +128,14 @@ getEntriesForCurrentDay accountId token =
 {-|
 Retrieve Entries For A Specific Date
 
-GET https://YOURACCOUNT.harvestapp.com/daily/{DAY_OF_THE_YEAR}/{YEAR}
+Usage:
+`getEntriesForDayOfYear accountId day year token userId`
+
+sends a GET request to `https://{accountId}.harvestapp.com/daily/{day}/{year}?access_token={token}`
 
 Allowed parameters:
 
-of_user e.g. of_user=123456
+`of_user` e.g. `of_user=123456`
 
 -}
 getEntriesForDayOfYear : String -> Int -> Int -> String -> Maybe Int -> Request (List DayEntry)
@@ -145,9 +154,12 @@ getEntriesForDayOfYear accountId day year token userId =
 {-|
 Retrieving A Single Entry
 
-GET https://YOURACCOUNT.harvestapp.com/daily/show/{DAY_ENTRY_ID}
+Usage:
+`getEntryById accountId entryId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/daily/show/{entryId}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 getEntryById : String -> Int -> String -> Request DayEntry
 getEntryById accountId entryId token =
@@ -165,9 +177,12 @@ getEntryById accountId entryId token =
 {-|
 Deleting An Entry
 
-DELETE https://YOURACCOUNT.harvestapp.com/daily/delete/{DAY_ENTRY_ID}
+Usage:
+`deleteEntry accountId entryId token`
 
-HTTP Response: 200 OK
+sends a DELETE request to `https://{accountId}.harvestapp.com/daily/delete/{entryId}?access_token={token}`
+
+Response: `200 OK`
 -}
 deleteEntry : String -> Int -> String -> Request String
 deleteEntry accountId entryId token =
@@ -185,9 +200,12 @@ deleteEntry accountId entryId token =
 {-|
 Toggling A Timer
 
-GET https://YOURACCOUNT.harvestapp.com/daily/timer/{DAY_ENTRY_ID}
+Usage:
+`toggleEntry accountId entryId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/daily/timer/{DAY_ENTRY_ID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 toggleEntry : String -> Int -> String -> Request String
 toggleEntry accountId entryId token =

@@ -134,11 +134,14 @@ taskAssignmentDecoder =
 {-|
 Show All Tasks
 
-GET https://YOURACCOUNT.harvestapp.com/tasks
+Usage:
+`getAllTasks accountId token params`
+
+sends a GET request to `https://{accountId}.harvestapp.com/tasks?access_token={token}`
 
 Allowed parameters:
 
-updated_since e.g. updated_since=2015-09-25+18%3A30
+`updated_since` e.g. `updated_since=2015-09-25+18%3A30`
 -}
 getAllTasks : String -> String -> Dict String String -> Request (List Task)
 getAllTasks accountId token params =
@@ -156,9 +159,12 @@ getAllTasks accountId token params =
 {-|
 Show One Task
 
-GET https://YOURACCOUNT.harvestapp.com/tasks/{task_id}
+Usage:
+`getTask accountId taskId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/tasks/{task_id}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 getTask : String -> Int -> String -> Request Task
 getTask accountId taskId token =
@@ -176,9 +182,12 @@ getTask accountId taskId token =
 {-|
 Create New Task
 
-POST https://YOURACCOUNT.harvestapp.com/tasks/
+Usage:
+`createTask accountId token task`
 
-A successful call will return: 201 Created - Location: /tasks/{new_task_id}
+sends a POST request to `https://{accountId}.harvestapp.com/tasks?access_token={token}`
+
+A successful call will return: `201 Created` and the header `Location: /tasks/{new_task_id}`
 -}
 createTask : String -> String -> Task -> Request String
 createTask accountId token task =
@@ -200,7 +209,10 @@ createTask accountId token task =
 {-|
 Archive/Delete A Task
 
-DELETE https://YOURACCOUNT.harvestapp.com/tasks/{task_id}
+Usage:
+`deleteTask accountId taskId token`
+
+sends a DELETE request to `https://{accountId}.harvestapp.com/tasks/{task_id}?access_token={token}`
 -}
 deleteTask : String -> Int -> String -> Request String
 deleteTask accountId taskId token =
@@ -218,7 +230,10 @@ deleteTask accountId taskId token =
 {-|
 Update A Task
 
-PUT https://YOURACCOUNT.harvestapp.com/tasks/{task_id}
+Usage:
+`updateTask accountId task token`
+
+sends a PUT request to `https://{accountId}.harvestapp.com/tasks/{task_id}?access_token={token}`
 -}
 updateTask : String -> Task -> String -> Request String
 updateTask accountId task token =
@@ -236,7 +251,10 @@ updateTask accountId task token =
 {-|
 Reactivate A Task
 
-POST https://YOURACCOUNT.harvestapp.com/tasks/{task_id}/activate
+Usage:
+`reactivateTask accountId taskId token`
+
+sends a POST request to `https://{accountId}.harvestapp.com/tasks/{taskId}/activate?access_token={token}`
 -}
 reactivateTask : String -> Int -> String -> Request String
 reactivateTask accountId taskId token =
@@ -258,11 +276,14 @@ reactivateTask accountId taskId token =
 {-|
 All Assigned Tasks To Project
 
-GET https://YOURACCOUNT.harvestapp.com/projects/{project_id}/task_assignments
+Usage:
+`getTasksAssignedToProject accountId projectId token params`
+
+sends a GET request to `https://{accountId}.harvestapp.com/projects/{project_id}/task_assignments?access_token={token}`
 
 Allowed parameters:
 
-updated_since e.g. updated_since=2010-09-25+18%3A30
+`updated_since` e.g. `updated_since=2010-09-25+18%3A30`
 -}
 getTasksAssignedToProject : String -> Int -> String -> Dict String String -> Request (List TaskAssignment)
 getTasksAssignedToProject accountId projectId token params =
@@ -280,9 +301,12 @@ getTasksAssignedToProject accountId projectId token params =
 {-|
 Get One Task Assignment
 
-GET https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/task_assignments/{TASK_ASSIGNMENT_ID}
+Usage:
+`getTaskAssignment accountId projectId assignmentId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/projects/{PROJECT_ID}/task_assignments/{TASK_ASSIGNMENT_ID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 getTaskAssignment : String -> Int -> Int -> String -> Request TaskAssignment
 getTaskAssignment accountId projectId assignmentId token =
@@ -300,7 +324,10 @@ getTaskAssignment accountId projectId assignmentId token =
 {-|
 Assign Task To A Project
 
-POST https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/task_assignments
+Usage:
+`assignTaskToAProject accountId taskId projectId token`
+
+sends a POST request to `https://{accountId}.harvestapp.com/projects/{projectId}/task_assignments?access_token={token}`
 
 Retruns `Location: /projects/{PROJECT_ID}/task_assignments/{NEW_TASK_ASSIGNMENT_ID}`
 -}
@@ -320,7 +347,10 @@ assignTaskToAProject accountId taskId projectId token =
 {-|
 Create A New Task And Assign It To A Project
 
-POST https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/task_assignments/add_with_create_new_task
+Usage:
+`createNewTaskAndAssignItToProject accountId projectId taskName token`
+
+sends a POST request to `https://{accountId}.harvestapp.com/projects/{PROJECT_ID}/task_assignments/add_with_create_new_task?access_token={token}`
 
 Returns `Location: /projects/{PROJECT_ID}/task_assignments/{NEW_TASK_ASSIGNMENT_ID}`
 -}
@@ -340,7 +370,10 @@ createNewTaskAndAssignItToProject accountId projectId taskName token =
 {-|
 Removing A Task From A Project
 
-DELETE https://YOURACCOUNT.harestapp.com/projects/{PROJECT_ID}/task_assignments/{TASK_ASSIGNMENT_ID
+Usage:
+`removeTaskFromProject accountId projectId assignmentId token`
+
+sends a DELETE request to `https://{accountId}.harestapp.com/projects/{projectId}/task_assignments/{assignmentId}?access_token={token}`
 -}
 removeTaskFromProject : String -> Int -> Int -> String -> Request String
 removeTaskFromProject accountId projectId assignmentId token =
@@ -358,7 +391,10 @@ removeTaskFromProject accountId projectId assignmentId token =
 {-|
 Updating A Task Assignment For A Project
 
-PUT https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/task_assignments/{TASK_ASSIGNMENT_ID}
+Usage:
+`updateTaskAssignment accountId assignment token`
+
+sends a PUT request to `https://{accountId}.harvestapp.com/projects/{PROJECT_ID}/task_assignments/{TASK_ASSIGNMENT_ID}?access_token={token}`
 -}
 updateTaskAssignment : String -> TaskAssignment -> String -> Request String
 updateTaskAssignment accountId assignment token =

@@ -15,6 +15,9 @@ import Http exposing (..)
 
 
 {-| create Harvest authorization API using account name (accountId), id of your client app (clientId) and redirectUrl
+
+Usage:
+`authUrl accountId clientId redirectUrl`
 -}
 authUrl : String -> String -> String -> String
 authUrl accountId clientId redirectUrl =
@@ -31,6 +34,9 @@ authUrl accountId clientId redirectUrl =
 
 
 {-| check if access_token is present in the url
+
+Usage:
+`checkAccessTokenAvailable urlHashToParse authenticationUrl`
 -}
 checkAccessTokenAvailable : String -> String -> Result String String
 checkAccessTokenAvailable urlHashToParse authenticationUrl =
