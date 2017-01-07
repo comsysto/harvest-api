@@ -310,16 +310,19 @@ paymentDecoder =
 
 {-|
 Show Recently Created Invoices
-GET https://YOURACCOUNT.harvestapp.com/invoices
 
-HTTP Response: 200 OK
+Usage: `getAllInvoices accountId token params`
+
+sends a GET request to `https://{accountId}.harvestapp.com/invoices?access_token={token}
+
+Response: `200 OK` if successful
 
 Allowed parameters:
-page: page=2 (first page starts with 1)
-from/to: from=YYYYMMDD&to=YYYYMMDD
-updated_since: updated_since=2010-09-25+18%3A30
-status: status=partial (possible invoice states are [open, partial, draft, paid, unpaid, pastdue])
-client: client=23445
+`page` e.g. `page=2` (first page starts with 1)
+`from/to` e.g. `from=YYYYMMDD&to=YYYYMMDD`
+`updated_since` e.g. `updated_since=2010-09-25+18%3A30`
+`status` e.g. `status=partial` (possible invoice states are [open, partial, draft, paid, unpaid, pastdue])
+`client` e.g. `client=23445`
 -}
 getAllInvoices : String -> String -> Dict String String -> Request (List Invoice)
 getAllInvoices accountId token params =
@@ -337,9 +340,12 @@ getAllInvoices accountId token params =
 {-|
 Show A Single Invoice
 
-GET https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}
+Usage:
+`getInvoice accountId invoiceId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/invoices/{INVOICEID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 getInvoice : String -> Int -> String -> Request Invoice
 getInvoice accountId invoiceId token =
@@ -357,9 +363,12 @@ getInvoice accountId invoiceId token =
 {-|
 Delete Existing Invoice
 
-DELETE https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}
+Usage:
+`deleteInvoice accountId invoiceId token`
 
-HTTP Response: 200 OK
+sends a DELETE request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 deleteInvoice : String -> Int -> String -> Request String
 deleteInvoice accountId invoiceId token =
@@ -377,9 +386,12 @@ deleteInvoice accountId invoiceId token =
 {-|
 Update Existing Invoice
 
-PUT https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}
+Usage:
+`updateInvoice accountId invoice token`
 
-HTTP Response: 200 OK, in addition to LOCATION: /invoices/{INVOICEID}
+sends a PUT request to `https://{accountId}.harvestapp.com/invoices/{INVOICEID}?access_token={token}`
+
+Response: `200 OK`, in addition to header `LOCATION: /invoices/{INVOICEID}`
 -}
 updateInvoice : String -> Invoice -> String -> Request String
 updateInvoice accountId invoice token =
@@ -397,9 +409,12 @@ updateInvoice accountId invoice token =
 {-|
 Create An Invoice
 
-POST https://YOURACCOUNT.harvestapp.com/invoices
+Usage:
+`createInvoice accountId token invoice`
 
-HTTP Response: 201 Created
+sends a POST request to `https://{accountId}.harvestapp.com/invoices?access_token={token}`
+
+Response: `201 Created` if successful
 -}
 createInvoice : String -> String -> Invoice -> Request String
 createInvoice accountId token invoice =
@@ -417,7 +432,10 @@ createInvoice accountId token invoice =
 {-|
 Show Invoice Messages
 
-GET https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/messages
+Usage:
+`getMessagesForInvoice accountId token invoiceId`
+
+sends a GET request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/messages?access_token={token}`
 -}
 getMessagesForInvoice : String -> String -> Int -> Request (List Message)
 getMessagesForInvoice accountId token invoiceId =
@@ -433,9 +451,12 @@ getMessagesForInvoice accountId token invoiceId =
 
 
 {-|
-Show a particular invoice message:
+Show a particular invoice message
 
-GET https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/message/{MESSAGEID}
+Usage:
+`getMessageForInvoice accountId token invoiceId messageId`
+
+sends a GET request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/message/{messageId}?access_token={token}`
 -}
 getMessageForInvoice : String -> String -> Int -> Int -> Request Message
 getMessageForInvoice accountId token invoiceId messageId =
@@ -453,9 +474,12 @@ getMessageForInvoice accountId token invoiceId messageId =
 {-|
 Send An Invoice
 
-POST https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/messages
+Usage:
+`sendInvoice accountId token message`
 
-HTTP Response: 201 Created
+sends a POST request to `https://{accountId}.harvestapp.com/invoices/{INVOICEID}/messages?access_token={token}`
+
+Response: `201 Created` if successful
 -}
 sendInvoice : String -> String -> SimpleMessage -> Request String
 sendInvoice accountId token message =
@@ -473,7 +497,10 @@ sendInvoice accountId token message =
 {-|
 Delete Existing Message
 
-DELETE https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/messages/{MESSAGEID}
+Usage:
+`deleteMessage accountId invoiceId messageId token`
+
+sends a DELETE request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/messages/{messageId}?access_token={token}`
 -}
 deleteMessage : String -> Int -> Int -> String -> Request String
 deleteMessage accountId invoiceId messageId token =
@@ -491,7 +518,10 @@ deleteMessage accountId invoiceId messageId token =
 {-|
 Mark An Invoice As Sent
 
-POST https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/messages/mark_as_sent
+Usage:
+`markInvoiceAsSent accountId invoiceId token`
+
+sends a POST request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/messages/mark_as_sent?access_token={token}`
 -}
 markInvoiceAsSent : String -> Int -> String -> Request String
 markInvoiceAsSent accountId invoiceId token =
@@ -501,7 +531,10 @@ markInvoiceAsSent accountId invoiceId token =
 {-|
 Change A Sent Invoice To Draft
 
-POST https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/messages/mark_as_draft
+Usage:
+`markInvoiceAsDraft accountId invoiceId token`
+
+sends a POST request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/messages/mark_as_draft?access_token={token}`
 -}
 markInvoiceAsDraft : String -> Int -> String -> Request String
 markInvoiceAsDraft accountId invoiceId token =
@@ -511,7 +544,10 @@ markInvoiceAsDraft accountId invoiceId token =
 {-|
 Write An Invoice Off
 
-POST https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/messages/mark_as_closed
+Usage:
+`markInvoiceAsClosed accountId invoiceId token`
+
+sends a POST request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/messages/mark_as_closed?access_token={token}`
 -}
 markInvoiceAsClosed : String -> Int -> String -> Request String
 markInvoiceAsClosed accountId invoiceId token =
@@ -521,7 +557,10 @@ markInvoiceAsClosed accountId invoiceId token =
 {-|
 Re-open An Invoice
 
-POST https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/messages/re_open
+Usage:
+`markInvoiceAsOpen accountId invoiceId token`
+
+sends a POST request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/messages/re_open?access_token={token}`
 -}
 markInvoiceAsOpen : String -> Int -> String -> Request String
 markInvoiceAsOpen accountId invoiceId token =
@@ -531,7 +570,10 @@ markInvoiceAsOpen accountId invoiceId token =
 {-|
 Show All Categories
 
-GET https://YOURACCOUNT.harvestapp.com/invoice_item_categories
+Usage:
+`getInvoiceCategories accountId token`
+
+sends a GET request to `https://{accountId}.harvestapp.com/invoice_item_categories?access_token={token}`
 -}
 getInvoiceCategories : String -> String -> Request (List InvoiceCategory)
 getInvoiceCategories accountId token =
@@ -549,7 +591,10 @@ getInvoiceCategories accountId token =
 {-|
 Create New Category
 
-POST https://YOURACCOUNT.harvestapp.com/invoice_item_categories
+Usage:
+`createInvoiceCategory accountId token invoiceCategory`
+
+sends a POST request to `https://{accountId}.harvestapp.com/invoice_item_categories?access_token={token}`
 -}
 createInvoiceCategory : String -> String -> InvoiceCategory -> Request String
 createInvoiceCategory accountId token invoiceCategory =
@@ -567,7 +612,10 @@ createInvoiceCategory accountId token invoiceCategory =
 {-|
 Update Existing Category
 
-PUT https://YOURACCOUNT.harvestapp.com/invoice_item_categories/{CATEGORYID}
+Usage:
+`updateInvoiceCategory accountId token invoiceCategory`
+
+sends a PUT request to `https://{accountId}.harvestapp.com/invoice_item_categories/{CATEGORYID}?access_token={token}`
 -}
 updateInvoiceCategory : String -> String -> InvoiceCategory -> Request String
 updateInvoiceCategory accountId token invoiceCategory =
@@ -585,7 +633,10 @@ updateInvoiceCategory accountId token invoiceCategory =
 {-|
 Delete A Category
 
-DELETE https://YOURACCOUNT.harvestapp.com/invoice_item_categories/{CATEGORYID}
+Usage:
+`deleteInvoiceCategory accountId invoiceCategoryId token`
+
+sends a DELETE request to `https://{accountId}.harvestapp.com/invoice_item_categories/{invoiceCategoryId}?access_token={token}`
 -}
 deleteInvoiceCategory : String -> Int -> String -> Request String
 deleteInvoiceCategory accountId invoiceCategoryId token =
@@ -603,7 +654,10 @@ deleteInvoiceCategory accountId invoiceCategoryId token =
 {-|
 Show Payments For An Invoice
 
-GET https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/payments
+Usage:
+`getPaymentsForInvoice accountId invoiceId token`
+
+sends a GET request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/payments?access_token={token}`
 -}
 getPaymentsForInvoice : String -> Int -> String -> Request (List Payment)
 getPaymentsForInvoice accountId invoiceId token =
@@ -619,9 +673,12 @@ getPaymentsForInvoice accountId invoiceId token =
 
 
 {-|
-Return a single, specific payment:
+Return a single, specific payment
 
-GET https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/payments/{PAYMENTID}
+Usage:
+`getPaymentForInvoice accountId invoiceId paymentId token`
+
+sends a GET request to `https://{accountId}.harvestapp.com/invoices/{invoiceId}/payments/{paymentId}?access_token={token}`
 -}
 getPaymentForInvoice : String -> Int -> Int -> String -> Request Payment
 getPaymentForInvoice accountId invoiceId paymentId token =
@@ -639,7 +696,10 @@ getPaymentForInvoice accountId invoiceId paymentId token =
 {-|
 Delete Existing Payment
 
-DELETE https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/payments{PAYMENTID}
+Usage:
+`deletePayment accountId invoiceId paymentId token`
+
+sends a DELETE request to `https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/payments{PAYMENTID}?access_token={token}`
 -}
 deletePayment : String -> Int -> Int -> String -> Request String
 deletePayment accountId invoiceId paymentId token =
@@ -657,9 +717,12 @@ deletePayment accountId invoiceId paymentId token =
 {-|
 Create A New Payment
 
-POST https://YOURACCOUNT.harvestapp.com/invoices/{INVOICEID}/payments
+Usage:
+`createPayment accountId token payment`
 
-The fields paid-at and amount are required, and optionally notes can be included.
+sends a POST request to `https://{accontIt}.harvestapp.com/invoices/{INVOICEID}/payments?acces_token={token}`
+
+The fields `paid-at` and `amount` are required, and optionally `notes` can be included.
 -}
 createPayment : String -> String -> Payment -> Request String
 createPayment accountId token payment =

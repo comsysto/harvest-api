@@ -89,7 +89,9 @@ type alias WhoAmI =
 {-|
 This call will return user and account information for the currently authenticated user.
 
-GET https://YOURACCOUNT.harvestapp.com/account/who_am_i
+Usage: `getUserInfo accountId token`
+
+sends a GET request to `https://YOURACCOUNT.harvestapp.com/account/who_am_i?access_token={token}`
 -}
 getUserInfo : String -> String -> Request WhoAmI
 getUserInfo accountId token =

@@ -43,7 +43,7 @@ import Http exposing (..)
 
 {-| Representation of a day entry.
 
-We use same object for both
+Same object used for both
 
 GET https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/entries?from=YYYYMMDD&to=YYYYMMDD
 
@@ -98,11 +98,14 @@ type alias Expense =
 {-|
 All Entries For Project Timeframe
 
-GET https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/entries?from=YYYYMMDD&to=YYYYMMDD
+Usage:
+`getEntriesByUserForDateRange accountId userId from to token params`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/people/{userId}/entries?from=YYYYMMDD&to=YYYYMMDD&access_token={token}`
+
+Response: `200 OK if successful`
 -}
-getEntriesByUserForDateRange : String -> String -> String -> String -> String -> Dict String String -> Request (List DayEntry)
+getEntriesByUserForDateRange : String -> Int -> String -> String -> String -> Dict String String -> Request (List DayEntry)
 getEntriesByUserForDateRange accountId userId from to token params =
     request
         { method = "GET"
@@ -117,21 +120,26 @@ getEntriesByUserForDateRange accountId userId from to token params =
 
 {-|
 All Entries By User For Timeframe
+
 This call requires parameters (from, to) to describe the timeframe to use for a report. This method can be used to view your own entries on a specific project.
 
-GET https://YOURACCOUNT.harvestapp.com/people/{USER_ID}/entries?from=YYYYMMDD&to=YYYYMMDD
+Usage:
+`getEntriesForProjectTimeframe accountId projectId from to token params`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/projects/{projectId}/entries?from=YYYYMMDD&to=YYYYMMDD&access_token={token}`
+
+Response: `200 OK` if successful
 
 Allowed parameters:
-billable: e.g. billable=yes (or `no`)
-only_billed:  e.g. only_billed=yes
-only_unbilled: e.g. only_unbilled=yes
-is_closed: e.g. is_closed=yes (or `no`)
-updated_since: e.g. updated_since=2010-09-25+18%3A30
-user_id: e.g. user_id=1334
+
+`billable` e.g. `billable=yes` (or `no`)
+`only_billed`  e.g. `only_billed=yes`
+`only_unbilled` e.g. `only_unbilled=yes`
+`is_closed` e.g. `is_closed=yes` (or `no`)
+`updated_since` e.g. `updated_since=2010-09-25+18%3A30`
+`user_id` e.g. `user_id=1334`
 -}
-getEntriesForProjectTimeframe : String -> String -> String -> String -> String -> Dict String String -> Request (List DayEntry)
+getEntriesForProjectTimeframe : String -> Int -> String -> String -> String -> Dict String String -> Request (List DayEntry)
 getEntriesForProjectTimeframe accountId projectId from to token params =
     request
         { method = "GET"
@@ -147,13 +155,16 @@ getEntriesForProjectTimeframe accountId projectId from to token params =
 {-|
 Show expenses for a given user and a time frame
 
-GET https://YOURACCOUNT.harvestapp.com/people/{USER_ID}/expenses?from=YYYYMMDD&to=YYYYMMDD
+Usage:
+`getExpensesByUserForDateRange accountId userId from to token params`
+
+sends a GET request to `https://{accountId}.harvestapp.com/people/{userId}/expenses?from=YYYYMMDD&to=YYYYMMDD&access_token={token}`
 
 Allowed parameters:
 
-is_closed: e.g. is_closed=yes (or `no`)
+`is_closed` e.g. `is_closed=yes` (or `no`)
 -}
-getExpensesByUserForDateRange : String -> String -> String -> String -> String -> Dict String String -> Request (List Expense)
+getExpensesByUserForDateRange : String -> Int -> String -> String -> String -> Dict String String -> Request (List Expense)
 getExpensesByUserForDateRange accountId userId from to token params =
     request
         { method = "GET"
@@ -169,17 +180,20 @@ getExpensesByUserForDateRange accountId userId from to token params =
 {-|
 Show expenses for a project and a time frame
 
-https://YOURACCOUNT.harvestapp.com/projects/{PROJECT_ID}/expenses?from=YYYYMMDD&to=YYYYMMDD
+Usage:
+`getExpensesForProjectTimeframe accountId projectId from to token params`
+
+sends a GET request to `https://{accountId}.harvestapp.com/projects/{projectId}/expenses?from=YYYYMMDD&to=YYYYMMDD&access_token={token}`
 
 Allowed parameters:
 
-is_closed: is_closed=yes (or `no`)
-updated_since: e.g. updated_since=2015-09-25+18%3A30
-only_billed: e.g. only_billed=yes
-only_unbilled: e.g. only_unbilled=yes
-updated_since: e.g. updated_since=2010-09-25+18%3A30
+`is_closed` e.g. `is_closed=yes` (or `no`)
+`updated_since` e.g. `updated_since=2015-09-25+18%3A30`
+`only_billed` e.g. `only_billed=yes`
+`only_unbilled` e.g. `only_unbilled=yes`
+`updated_since` e.g. `updated_since=2010-09-25+18%3A30`
 -}
-getExpensesForProjectTimeframe : String -> String -> String -> String -> String -> Dict String String -> Request (List Expense)
+getExpensesForProjectTimeframe : String -> Int -> String -> String -> String -> Dict String String -> Request (List Expense)
 getExpensesForProjectTimeframe accountId projectId from to token params =
     request
         { method = "GET"
@@ -260,7 +274,7 @@ expense =
 {- Helpers for Harvest URLs -}
 
 
-createUrlForEntriesByProject : String -> String -> String -> String -> String -> Dict String String -> String
+createUrlForEntriesByProject : String -> Int -> String -> String -> String -> Dict String String -> String
 createUrlForEntriesByProject accountId projectId from to token params =
     let
         url =
@@ -272,11 +286,11 @@ createUrlForEntriesByProject accountId projectId from to token params =
         url ++ p
 
 
-createUrlForEntriesByUser : String -> String -> String -> String -> String -> Dict String String -> String
-createUrlForEntriesByUser accountId projectId from to token params =
+createUrlForEntriesByUser : String -> Int -> String -> String -> String -> Dict String String -> String
+createUrlForEntriesByUser accountId id from to token params =
     let
         url =
-            urlForEntriesByUser accountId projectId from to token
+            urlForEntriesByUser accountId id from to token
 
         p =
             Dict.foldl (\key val agg -> agg ++ "&" ++ key ++ "=" ++ val) "" params
@@ -284,12 +298,12 @@ createUrlForEntriesByUser accountId projectId from to token params =
         url ++ p
 
 
-urlForEntriesByProject : String -> String -> String -> String -> String -> String
+urlForEntriesByProject : String -> Int -> String -> String -> String -> String
 urlForEntriesByProject accountId projectId from to token =
     "https://"
         ++ accountId
         ++ ".harvestapp.com/projects/"
-        ++ projectId
+        ++ (toString projectId)
         ++ "/entries?from="
         ++ from
         ++ "&to="
@@ -298,12 +312,12 @@ urlForEntriesByProject accountId projectId from to token =
         ++ token
 
 
-urlForEntriesByUser : String -> String -> String -> String -> String -> String
+urlForEntriesByUser : String -> Int -> String -> String -> String -> String
 urlForEntriesByUser accountId userId from to token =
     "https://"
         ++ accountId
         ++ ".harvestapp.com/people/"
-        ++ userId
+        ++ (toString userId)
         ++ "/entries?from="
         ++ from
         ++ "&to="
@@ -312,7 +326,7 @@ urlForEntriesByUser accountId userId from to token =
         ++ token
 
 
-createUrlForExpensesByProject : String -> String -> String -> String -> String -> Dict String String -> String
+createUrlForExpensesByProject : String -> Int -> String -> String -> String -> Dict String String -> String
 createUrlForExpensesByProject accountId projectId from to token params =
     let
         url =
@@ -324,7 +338,7 @@ createUrlForExpensesByProject accountId projectId from to token params =
         url ++ p
 
 
-createUrlForExpensesByUser : String -> String -> String -> String -> String -> Dict String String -> String
+createUrlForExpensesByUser : String -> Int -> String -> String -> String -> Dict String String -> String
 createUrlForExpensesByUser accountId userId from to token params =
     let
         url =
@@ -336,12 +350,12 @@ createUrlForExpensesByUser accountId userId from to token params =
         url ++ p
 
 
-urlForProject : String -> String -> String -> String -> String -> String
+urlForProject : String -> Int -> String -> String -> String -> String
 urlForProject accountId projectId from to token =
     "https://"
         ++ accountId
         ++ ".harvestapp.com/projects/"
-        ++ projectId
+        ++ (toString) projectId
         ++ "/expenses?from="
         ++ from
         ++ "&to="
@@ -350,12 +364,12 @@ urlForProject accountId projectId from to token =
         ++ token
 
 
-urlForUser : String -> String -> String -> String -> String -> String
+urlForUser : String -> Int -> String -> String -> String -> String
 urlForUser accountId userId from to token =
     "https://"
         ++ accountId
         ++ ".harvestapp.com/people/"
-        ++ userId
+        ++ (toString userId)
         ++ "/expenses?from="
         ++ from
         ++ "&to="

@@ -116,9 +116,12 @@ projectsDecoder =
 {-|
 Show A Project
 
-GET https://YOURACCOUNT.harvestapp.com/projects/{PROJECTID}
+Usage:
+`getProject accountId projectId token`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/projects/{PROJECTID}?access_token={token}`
+
+Response: `200 OK` if successful
 -}
 getProject : String -> String -> String -> Request Project
 getProject accountId projectId token =
@@ -136,14 +139,17 @@ getProject accountId projectId token =
 {-|
 Show All Projects
 
-GET https://YOURACCOUNT.harvestapp.com/projects
+Usage:
+`getAllProjects accountId token params`
 
-HTTP Response: 200 OK
+sends a GET request to `https://{accountId}.harvestapp.com/projects?access_token={token}`
+
+Response: `200 OK` if successful
 
 Allowed parameters:
 
-client_id: client={CLIENTID}
-updated_since: updated_since=2015-03-25+18%3A30
+`client_id` e.g. `client={CLIENTID}`
+`updated_since` e.g. `updated_since=2015-03-25+18%3A30`
 -}
 getAllProjects : String -> String -> Dict String String -> Request (List Project)
 getAllProjects accountId token params =
@@ -161,9 +167,12 @@ getAllProjects accountId token params =
 {-|
 Create A New Project
 
-POST https://YOURACCOUNT.harvestapp.com/projects
+Usage:
+`createProject accountId token project`
 
-HTTP Response: 201 Created
+sends a POST request `https://YOURACCOUNT.harvestapp.com/projects?access_token={token}`
+
+Response: `201 Created` if successful
 -}
 createProject : String -> String -> SimpleProject -> Request String
 createProject accountId token project =
@@ -185,7 +194,10 @@ createProject accountId token project =
 {-|
 Delete A Project
 
-DELETE https://YOURACCOUNT.harvestapp.com/projects/{PROJECTID}
+Usage:
+`deleteProject accountId projectId token`
+
+sends a DELETE request to `https://{accountId}.harvestapp.com/projects/{PROJECTID}?access_token={token}`
 -}
 deleteProject : String -> Int -> String -> Request String
 deleteProject accountId projectId token =
@@ -203,7 +215,10 @@ deleteProject accountId projectId token =
 {-|
 Update An Existing Project
 
-PUT https://YOURACCOUNT.harvestapp.com/projects/{PROJECTID}
+Usage:
+`updateProject accountId project token`
+
+sends a PUT request to `https://{accountId}.harvestapp.com/projects/{PROJECTID}?access_token={token}`
 -}
 updateProject : String -> Project -> String -> Request String
 updateProject accountId project token =
@@ -221,7 +236,10 @@ updateProject accountId project token =
 {-|
 (De)Activate An Existing Project
 
-PUT https://YOURACCOUNT.harvestapp.com/projects/{PROJECTID}/toggle
+Usage:
+`toggleProject accountId projectId token`
+
+sends a PUT request to `https://{accountId}.harvestapp.com/projects/{projectId}/toggle?access_token={token}`
 -}
 toggleProject : String -> Int -> String -> Request String
 toggleProject accountId projectId token =
